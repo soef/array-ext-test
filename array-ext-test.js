@@ -1,6 +1,9 @@
 "use strict";
 
-function nop () {};
+function nop () {}
+
+function nopx () { nop();}
+nopx();
 
 function toHex (val) {
     return ('0' + val.toString(16)).substr(-2);
@@ -8,9 +11,9 @@ function toHex (val) {
 exports.toHex = toHex;
 
 function arrayToHex(ar, len) {
-    var s = "";
-    if (len == undefined) len = ar.length;
-    for (var i=0; i<len; i++) {
+    let s = "";
+    if (len === undefined) len = ar.length;
+    for (let i=0; i<len; i++) {
         //s += ar[i].toHex() + ' ';
         s += toHex(ar[i]) + ' ';
     }
@@ -22,7 +25,7 @@ exports.arrayToHex = arrayToHex;
 if ([].find === undefined) {
     Array.prototype.find = function(cb, thisArg) {
         if (thisArg) cb.bind(thisArg);
-        for (var i=0; i<this.length; i++) {
+        for (let i=0; i<this.length; i++) {
             if (cb(this[i], i, this)) return this[i];
         }
         return undefined;
@@ -30,7 +33,7 @@ if ([].find === undefined) {
 }
 
 Array.prototype.forEachCallback = function forEachCallback (func, readyCallback) {
-    var cnt = -1, len = this.length, self = this;
+    let cnt = -1, len = this.length, self = this;
 
     function next() {
         if (++cnt >= len) {
@@ -45,16 +48,16 @@ Array.prototype.toHex = function () {
     return arrayToHex(this);
 };
 Array.prototype.eq = function (arr) {
-    if(arr == undefined) return false;
-    return this.length==arr.length && this.every(function(v,i) { return v === arr[i]});
+    if(arr === undefined) return false;
+    return this.length===arr.length && this.every(function(v,i) { return v === arr[i]});
 };
 Array.prototype.unique = function (cb) {
-    var oldLen = this.length;
+    let oldLen = this.length;
     switch (typeof cb) {
         case 'undefined':
-            for (var i = 0; i < this.length; i++) {
-                var v = this [i];
-                for (var j = i + 1; j < this.length; j++) {
+            for (let i = 0; i < this.length; i++) {
+                let v = this [i];
+                for (let j = i + 1; j < this.length; j++) {
                     if (this[j] === v) {
                         this.splice(j, 1);
                         j--;
@@ -63,9 +66,9 @@ Array.prototype.unique = function (cb) {
             }
             break;
         case 'string':
-            for (var i = 0; i < this.length; i++) {
-                var v = this [i];
-                for (var j = i + 1; j < this.length; j++) {
+            for (let i = 0; i < this.length; i++) {
+                let v = this [i];
+                for (let j = i + 1; j < this.length; j++) {
                     if (this[j][cb] === v [cb]) {
                         this.splice(j, 1);
                         j--;
@@ -74,9 +77,9 @@ Array.prototype.unique = function (cb) {
             }
             break;
         case 'function':
-            for (var i = 0; i < this.length; i++) {
-                var v = this [i];
-                for (var j = i + 1; j < this.length; j++) {
+            for (let i = 0; i < this.length; i++) {
+                let v = this [i];
+                for (let j = i + 1; j < this.length; j++) {
                     if (cb(this[j], v)) {
                         this.splice(j, 1);
                         j--;
@@ -85,11 +88,11 @@ Array.prototype.unique = function (cb) {
             }
             break;
     }
-    return oldLen != this.length;
+    return oldLen !== this.length;
 };
 
 Array.prototype.uniquef = function (cb) {
-    var a = [];
+    let a = [];
     switch (typeof cb) {
         case 'undefined':
             this.forEach(function(v) {
@@ -138,9 +141,8 @@ Array.prototype.contains = function(propertyName, entry) {
             return v[propertyName] === entry[propertyName];
         })
     }
-    var found = false;
-    for(var i=entry.length-1; i>=0; i--) {
-        var found = this.find(function(v) {
+    for(let i=entry.length-1; i>=0; i--) {
+        let found = this.find(function(v) {
             return v[propertyName] === entry[i][propertyName];
         });
         if (found) return found;
@@ -164,27 +166,27 @@ Array.prototype.add = function (v) {
 };
 
 Array.prototype.lastThat = function (cb) {
-    for (var i=this.length-1; i>=0; i--) {
+    for (let i=this.length-1; i>=0; i--) {
         cb (this[i], i, this);
     }
 };
 
 Array.prototype.removeDup = function (propName, arr) {
     if (!this.length) return 0;
-    var oldLen = this.length;
+    let oldLen = this.length;
     if (arr === undefined) {
         arr = propName;
         propName = undefined;
     }
     if (!Array.isArray(arr)) {
         if (!propName) {
-            for (var i = this.length - 1; i >= 0; i--) {
+            for (let i = this.length - 1; i >= 0; i--) {
                 if (this[i] === arr) {
                     this.splice(i, 1);
                 }
             }
         } else {
-            for (var i = this.length - 1; i >= 0; i--) {
+            for (let i = this.length - 1; i >= 0; i--) {
                 if (this[i][propName] === arr[propName]) {
                     this.splice(i, 1);
                 }
@@ -193,7 +195,7 @@ Array.prototype.removeDup = function (propName, arr) {
         return oldLen - this.length;
     }
 
-    // for (var i=arr.length-1; i>=0; i--) {
+    // for (let i=arr.length-1; i>=0; i--) {
     //     this.removeDup(propName, arr[i]);
     //     while (i >= arr.length) i--;
     // }
