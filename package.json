@@ -1,0 +1,38 @@
+{
+  "name": "array-ext-test",
+  "version": "0.1.5",
+  "description": "Some Array extensions",
+  "author": {
+    "name": "soef",
+    "email": "soef@gmx.net"
+  },
+  "contributors": [
+    {
+      "name": "soef",
+      "email": "soef@gmx.net"
+    }
+  ],
+  "homepage": "https://github.com/soef/array-ext-test",
+  "license": "MIT",
+  "keywords": [
+    "Array extension"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4",
+    "chai": "^3.4.1"
+  },  
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soef/array-ext-test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/soef/array-ext-test/issues"
+  },
+  "main": "array-ext-test.js",
+  "readmeFilename": "readme.md"
+}
