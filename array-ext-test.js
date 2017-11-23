@@ -1,5 +1,7 @@
 "use strict";
 
+function nop () {};
+
 function toHex (val) {
     return ('0' + val.toString(16)).substr(-2);
 }
@@ -29,7 +31,7 @@ if ([].find === undefined) {
 
 Array.prototype.forEachCallback = function forEachCallback (func, readyCallback) {
     var cnt = -1, len = this.length, self = this;
-    
+
     function next() {
         if (++cnt >= len) {
             return readyCallback && readyCallback();
@@ -123,7 +125,7 @@ Array.prototype.uniquef = function (cb) {
 //Array.prototype.contains = function(propertyName, entry) {
 //	return this.find(function(v) {
 //		return v[propertyName] === entry[propertyName];
-//	})  
+//	})
 //};
 Array.prototype.contains = function(propertyName, entry) {
     if (entry === undefined) {
@@ -190,7 +192,7 @@ Array.prototype.removeDup = function (propName, arr) {
         }
         return oldLen - this.length;
     }
-    
+
     // for (var i=arr.length-1; i>=0; i--) {
     //     this.removeDup(propName, arr[i]);
     //     while (i >= arr.length) i--;
