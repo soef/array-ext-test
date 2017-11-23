@@ -5,6 +5,7 @@ function nop () {}
 function nopx () { nop();}
 nopx();
 toHex();
+toHex();
 
 function toHex (val) {
     return ('0' + val.toString(16)).substr(-2);
